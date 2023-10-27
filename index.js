@@ -99,15 +99,15 @@ function cumleKur(
 
 /* (Oto test yok) cumleKur fonksiyonuna yalnızca 1 parametre göndererek "Hello World!" stringini elde edin, 
 sonucu konsolde gözlemleyin */
+console.log("Örnek 1:", cumleKur("Hello World!"));
 
 /* (Oto test yok) cumleKur fonksiyonuna yalnızca 2 parametre göndererek "Hello World!" stringini elde edin, 
 sonucu konsolde gözlemleyin */
-
+console.log("Örnek 2:", cumleKur("Hello", " World!"));
 /* (Oto test var) cumleKur fonksiyonuna 5 parametre göndererek "Ben iyi bir yazılımcı olacağım!" stringini 
 elde edin, sonucu `bircumle` değişkenine atayın ve konsolde gözlemleyin */
-var bircumle;
-
-/* kodlar buraya */
+var bircumle = cumleKur("Ben", " iyi", " bir", " yazılımcı", " olacağım!");
+console.log(bircumle);
 
 //		Sayfanın en üstünde global olarak tanımlanmış `cumleler` adında bir dizi bulunmaktadır. Bu dizinin
 // içinde en çok 5 en az 1 adet string bulunan diziler bulunmaktadır.Aşağıdaki görevlerde aksi
@@ -128,9 +128,10 @@ var bircumle;
 			5. Oluşturulan yeni dizi döndürülecek.
 	*/
 
-function cumlelereDonustur(/* kodlar buraya */) {
-  /* kodlar buraya */
+function cumlelereDonustur(cumleler, ayrac = ",") {
+  return cumleler.map((cumle) => cumle.join(ayrac));
 }
+console.log(cumlelereDonustur(cumleler, " "));
 
 /* GÖREV 2:
 		paragrafOlustur fonksiyonuna aşağıdakileri uygulayın.
@@ -145,16 +146,36 @@ function cumlelereDonustur(/* kodlar buraya */) {
 			6. Oluşturulan paragraf döndürülecek
 	*/
 
-function paragrafOlustur(/* kodlar buraya */) {
-  /* kodlar buraya */
+function paragrafOlustur(
+  cumlelerCallback,
+  cumleKurCallback,
+  cumlelereDonusturCallback
+) {
+  const yeniDizi = cumlelereDonusturCallback(cumlelerCallback, " ");
+  yeniDizi.filter((yeniDizi, index) => {
+    return [1, 3, 5, 7, 9].includes(index);
+  });
+  return cumleKurCallback(
+    yeniDizi[1],
+    yeniDizi[3],
+    yeniDizi[5],
+    yeniDizi[7],
+    yeniDizi[9]
+  );
 }
-
+console.log(
+  "Görev 2: ",
+  paragrafOlustur(cumleler, cumleKur, cumlelereDonustur)
+);
 /* 	GÖREV 3:
 		Yukarıda isimleri sebzeler ve meyveler olan 2 dizi bulunmaktadır. Bu dizileri kullanarak aşağıdaki görevleri tamamlayın.
 			3a. meyveler dizisinin ilk ve son elemanlarını diziden çıkartın. (.pop ve .shift metodlarını kullanın)
  */
 //3a çözümü
-/* kodlar buraya */
+
+console.log("Görev 3a Çıkarılan Meyve 1: ", meyveler.pop());
+console.log("Görev 3a Çıkarılan Meyve 2: ", meyveler.shift());
+console.log("Görev 3a.1 Kalan meyveler: ", meyveler);
 
 /* 			3b.  Bir tavşan ve bir kirpi arkadaşlar sebzeler dizimizin peşine düştü. Tavşan => 🐇 , Kirpi=> 🦔 , 
 Tavşanla kirpi sebzeleri ele geçirmek için bir plan kurdular. Tavşan diziye önden saldıracak, kirpi ise 
@@ -162,15 +183,19 @@ arkalarından dolaşacak. Varsayalım ki arkadaşların planları başarılı ol
 Kirpiyi dizinin son elemanına ekleyin 🦔
  */
 //3b çözümü
-/* kodlar buraya */
+console.log("Görev 3b: ", sebzeler);
+sebzeler.unshift("🐇");
+console.log("Görev 3b Tavşan Eklendi: ", sebzeler);
+sebzeler.push("🦔");
+console.log("Görev 3b Tavşan ve Kirpi Eklendi: ", sebzeler);
 
 /* 			3c. manav isminde bir dizi oluşturun.`meyveler` dizisi ilk elemanlara, `sebzeler` dizisi son 
 elemanlara denk gelecek şekilde, iki diziyi birleştirip sonucu manav dizisine aktarın. (.concat metodu)
  */
 //3c çözümü
-/* kodlar buraya */
 
-var manav;
+var manav = meyveler.concat(sebzeler);
+console.log("Görev 3c: ", manav);
 
 /* 	GÖREV 4:
 		Yeni kurulmuş bir mesajlaşma startup firması atılan mesajları emojilerle zenginleştirmek istiyor. 
@@ -189,9 +214,21 @@ var manav;
 			4. elde edilen string döndürülecek
  */
 
-function emojileriDonustur(/* kodlar buraya */) {
-  /* kodlar buraya */
+const mesaj =
+  "Babam her zaman :) çok sevdi.Olanları :D unutup bir daha :d dönemem.:O O zaman senin :o bu halindim.Kader <3 bizi her zaman ayırdı.:( İçimden gel dedim ama gelmedin.";
+
+function emojileriDonustur(mesaj, emojilerObj) {
+  for (let key in emojilerObj) {
+    mesaj = mesaj.replaceAll(key.toLowerCase(), emojilerObj[key]);
+    mesaj = mesaj.replaceAll(key.toUpperCase(), emojilerObj[key]);
+  }
+  return mesaj;
 }
+
+console.log(
+  "Görev 4: Emojileri Dönüştür: ",
+  emojileriDonustur(mesaj, emojiler)
+);
 
 /*  Bu satırın aşağısındaki kodları lütfen değiştirmeyin  */
 function sa() {
